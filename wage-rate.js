@@ -1,5 +1,5 @@
  var minimumWage = 7.25,
-    dollarRegEx = new RegExp(/^\$(([0-9]{1,3},([0-9]{3},)*)[0-9]{3}|[0-9]{1,3})(\.[0-9]{2})?$/g);
+    dollarRegEx = new RegExp(/^\$(\d{1,3}(,?\d{3})*(\.\d\d)?)$/g);
 
 function wagifySomeText(text) {
     var match = dollarRegEx.exec(text);
@@ -9,7 +9,7 @@ function wagifySomeText(text) {
 
         var hours = amount / minimumWage;
 
-        return hours.toFixed(2) + ' hours';
+        return '$' + hours.toFixed(1) + ' hours';
     }
 
     return text;
