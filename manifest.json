@@ -6,6 +6,13 @@
   "permissions": [
     "tabs", "http://*/*", "https://*/*"
   ],
+  "background": {
+    "page": "pages/background.html"
+  },
+  "browser_action": {
+    "default_icon": "img/clock.png",
+    "default_title": "Wage Rate"
+  },
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],

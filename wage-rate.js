@@ -1,5 +1,5 @@
  var minimumWage = 7.25,
-    dollarRegEx = new RegExp(/^\$(\d{1,3}(,?\d{3})*(\.\d\d)?)$/g);
+    dollarRegEx = new RegExp(/\$(\d{1,3}(,?\d{3})*(\.\d\d)?)/g);
 
 function wagifySomeText(text) {
     var match = dollarRegEx.exec(text);
@@ -9,7 +9,7 @@ function wagifySomeText(text) {
 
         var hours = amount / minimumWage;
 
-        return '$' + hours.toFixed(1) + ' hours';
+        return text.replace(dollarRegEx, hours.toFixed(1) + ' hours');
     }
 
     return text;
@@ -29,8 +29,12 @@ function wagifyTheDom(element) {
     }
 }
 
-wagifyTheDom(document.body);
+chrome.extension.sendRequest({name: "getMode"}, function(response) {
+    if (response.value == 'hours') {
+        wagifyTheDom(document.body);
 
-document.body.addEventListener('DOMNodeInserted', function(event) {
-    wagifyTheDom(event.target);
+        document.body.addEventListener('DOMNodeInserted', function(event) {
+            wagifyTheDom(event.target);
+        });
+    }
 });
