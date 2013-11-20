@@ -17,7 +17,7 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["wage-rate.js"],
+      "js": ["minimum-wages.js", "wage-rate.js"],
       "run_at" : "document_end"
     }
   ],

@@ -1,22 +1,42 @@
+// Set defaults for the very first time
+
+if (!localStorage.getItem('options')) {
+    localStorage.setItem('options', JSON.stringify({
+        mode: 'hours',
+        type: 'federal',
+        state: Object.keys(wages.state)[0],
+        other: wages.federal
+    }))
+}
 
 chrome.browserAction.onClicked.addListener(function(tab) {
-    if (localStorage.getItem('mode') === 'hours') {
-        localStorage.setItem('mode', 'money');
+    var options = JSON.parse(localStorage.getItem('options'));
+
+    if (options.mode === 'hours') {
+        options.mode = 'money';
         chrome.browserAction.setIcon({ path: '/img/money.png' });
     } else {
-        localStorage.setItem('mode', 'hours');
-        chrome.browserAction.setIcon({ path: '/img/clock.png'} );
+        options.mode = 'hours';
+        chrome.browserAction.setIcon({ path: '/img/clock.png'});
     }
+
+    localStorage.setItem('options', JSON.stringify(options));
 });
 
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-    if (request.name == 'getMode') {
-        sendResponse({value: localStorage.getItem('mode') || 'hours' });
-    } else if (request.name == 'getOptions') {
-        sendResponse({ options: JSON.parse(localStorage.getItem('options') || '{}') });
-    } else if (request.name == 'setOptions') {
-        localStorage.setItem('options', JSON.stringify(request.options));
-        sendResponse('ok');
-        console.log('Saved Options');
+    var options = JSON.parse(localStorage.getItem('options'));
+
+    // Merge options objects if we have request.options
+    if (request.options) {
+        for (var option in request.options) {
+            options[option] = request.options[option];
+        }
     }
+
+    // If this was a request to set, then save the data
+    if (request.name == 'set') {
+        localStorage.setItem('options', JSON.stringify(options));
+    }
+
+    sendResponse(options);
 });

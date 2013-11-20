@@ -19,20 +19,19 @@ function setWageType(value) {
     }
 }
 
-chrome.extension.sendRequest({ name: 'getOptions' }, function(response) {
-    console.log(response);
-    setWageType(response.options.wageType || 'federal');
+chrome.extension.sendRequest({ name: 'options' }, function(response) {
+    setWageType(response.type || 'federal');
 
-    document.getElementById('other').value = response.options.other || '7.25';
-    document.getElementById('state').value = response.options.state || 'AL';
+    document.getElementById('other').value = response.other;
+    document.getElementById('state').value = response.state;
 });
 
 document.getElementById('saveBtn').onclick = function() {
-    chrome.extension.sendRequest({ name: 'setOptions', options: {
-        wageType: getWageType(),
+    chrome.extension.sendRequest({ name: 'set', options: {
+        type: getWageType(),
         state: document.getElementById('state').value,
         other: document.getElementById('other').value
     }}, function() {
-        //document.getElementById('status').text = 'Saved!';
+        document.getElementById('status').text = 'Saved!';
     });
 };
