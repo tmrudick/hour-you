@@ -12,5 +12,11 @@ chrome.browserAction.onClicked.addListener(function(tab) {
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
     if (request.name == 'getMode') {
         sendResponse({value: localStorage.getItem('mode') || 'hours' });
+    } else if (request.name == 'getOptions') {
+        sendResponse({ options: JSON.parse(localStorage.getItem('options') || '{}') });
+    } else if (request.name == 'setOptions') {
+        localStorage.setItem('options', JSON.stringify(request.options));
+        sendResponse('ok');
+        console.log('Saved Options');
     }
 });

@@ -29,7 +29,7 @@ function wagifyTheDom(element) {
     }
 }
 
-chrome.extension.sendRequest({name: "getMode"}, function(response) {
+chrome.extension.sendRequest({ name: "getMode" }, function(response) {
     if (response.value == 'hours') {
         wagifyTheDom(document.body);
 
