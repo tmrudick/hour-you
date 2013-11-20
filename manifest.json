@@ -1,5 +1,5 @@
 {
-  "name": "Wage Rate",
+  "name": "Hour You?",
   "version": "0.0.1",
   "manifest_version": 2,
   "description": "Replaces dollars with hours.",
@@ -12,7 +12,7 @@
   "options_page": "pages/options.html",
   "browser_action": {
     "default_icon": "img/clock.png",
-    "default_title": "Wage Rate"
+    "default_title": "Hour You?"
   },
   "content_scripts": [
     {
