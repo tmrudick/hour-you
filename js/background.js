@@ -1,5 +1,10 @@
-// Set defaults for the very first time
+/**
+ * Fetches and stores options from localStorage for the rest of the extension.
+ *
+ * Also handles disabling and enabling the extension from the toolbar.
+ **/
 
+// List the icon sizes for enabled and disabled states
 var icons = {
     enabled: {
         '19': '/img/clock19.png',
@@ -11,6 +16,7 @@ var icons = {
     }
 }
 
+// Set defaults for the very first time the extension is run
 if (!localStorage.getItem('options')) {
     localStorage.setItem('options', JSON.stringify({
         mode: 'hours',
@@ -20,20 +26,25 @@ if (!localStorage.getItem('options')) {
     }));
 }
 
+// Deal with the icon in the toolbar being clicked
 chrome.browserAction.onClicked.addListener(function(tab) {
     var options = JSON.parse(localStorage.getItem('options'));
-    if (options.mode === 'hours') {
-        options.mode = 'money';
+
+    // Toggle enabled/disabled in settings and icons
+    if (options.mode === 'enabled') {
+        options.mode = 'disabled';
         chrome.browserAction.setIcon({ path: icons.disabled });
     } else {
-        options.mode = 'hours';
+        options.mode = 'enabled';
         chrome.browserAction.setIcon({ path: icons.enabled });
     }
 
     localStorage.setItem('options', JSON.stringify(options));
 });
 
+// Handle requests from other scripts in the extension
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+    // Always fetch the options from localStorage
     var options = JSON.parse(localStorage.getItem('options'));
 
     // Merge options objects if we have request.options
@@ -48,5 +59,6 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
         localStorage.setItem('options', JSON.stringify(options));
     }
 
+    // Always send the options back for evey request
     sendResponse(options);
 });
