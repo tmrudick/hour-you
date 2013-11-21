@@ -1,12 +1,23 @@
 <!doctype html>
 <html>
     <head>
-        <title>Wage Rate</title>
+        <title>Hour You?</title>
+        <link type="text/css" rel="stylesheet" href="/css/options.css">
     </head>
     <body>
-        <p><input type="radio" name="wageType" value="federal" /> United Stated Federal</p>
-        <p><input type="radio" name="wageType" value="state" /> State
-            <select id="state">
+        <h1>Hour You?</h1>
+        <p id="status"></p>
+        <div>
+            <p>Minimum Wage:</p>
+            <select id="type-dropdown">
+                <option>Federal</option>
+                <option>State</option>
+                <option>Other</option>
+            </select>
+        </div>
+        <div id="state">
+            <p>Select State:</p>
+            <select id="state-dropdown">
                 <option>AL</option>
                 <option>AK</option>
                 <option>AZ</option>
@@ -59,10 +70,15 @@
                 <option>WI</option>
                 <option>WY</option>
             </select>
-        </p>
-        <p><input type="radio" name="wageType" value="other" /> Other <input type="text" id="other" /></p>
-        <p><button id="saveBtn">Save</button>
-        <p id="status"></p>
+        </div>
+        <div id="other">
+            <p>Other Amount:</p>
+            <input type="text" id="other-text" />
+        </div>
+        <div>
+            <button id="saveBtn">Save</button>
+        </div>
+
         <script src="/minimum-wages.js"></script>
         <script src="/js/options.js"></script>
     </body>
