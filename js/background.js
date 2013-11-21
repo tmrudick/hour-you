@@ -19,7 +19,7 @@ var icons = {
 // Set defaults for the very first time the extension is run
 if (!localStorage.getItem('options')) {
     localStorage.setItem('options', JSON.stringify({
-        mode: 'hours',
+        mode: 'enabled',
         type: 'Federal',
         state: Object.keys(wages.state)[0],
         other: wages.federal
