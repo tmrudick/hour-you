@@ -3,10 +3,10 @@
 if (!localStorage.getItem('options')) {
     localStorage.setItem('options', JSON.stringify({
         mode: 'hours',
-        type: 'federal',
+        type: 'Federal',
         state: Object.keys(wages.state)[0],
         other: wages.federal
-    }))
+    }));
 }
 
 chrome.browserAction.onClicked.addListener(function(tab) {

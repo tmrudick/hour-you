@@ -32,9 +32,9 @@ chrome.extension.sendRequest({ name: "options" }, function(response) {
     if (response.mode === 'hours') {
         // Get the wage
         var wage = response.other;
-        if (response.type === 'federal') {
+        if (response.type === 'Federal') {
             wage = wages.federal;
-        } else if (response.type === 'state') {
+        } else if (response.type === 'State') {
             wage = wages.state[response.state];
         }
 
