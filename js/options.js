@@ -29,7 +29,8 @@ document.getElementById('saveBtn').onclick = function() {
         state: document.getElementById('state-dropdown').value,
         other: document.getElementById('other-text').value
     }}, function() {
-        document.getElementById('status').innerHTML = 'Saved!';
+        document.getElementById('status').style.display = 'block';
+        document.getElementById('status').innerHTML = 'Saved Options!';
     });
 };
 
@@ -41,3 +42,4 @@ document.getElementById('type-dropdown').addEventListener('change', function(eve
 // Prevent flicker
 document.getElementById('state').style.display = 'none';
 document.getElementById('other').style.display = 'none';
+document.getElementById('status').style.display = 'none';
