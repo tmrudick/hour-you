@@ -9,6 +9,9 @@ function updateOptions(type) {
         document.getElementById('state').style.display = 'none';
         document.getElementById('other').style.display = 'none';
     }
+
+    // Always hide the status
+    document.getElementById('status').style.display = 'none';
 }
 
 // Load the options when the page loads
