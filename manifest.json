@@ -1,8 +1,8 @@
 {
   "name": "Hour You?",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "manifest_version": 2,
-  "description": "Replaces dollars with hours worked.",
+  "description": "Is it worth it?",
   "permissions": [
     "tabs", "http://*/*", "https://*/*"
   ],
@@ -29,5 +29,6 @@
       "run_at" : "document_end"
     }
   ],
+  "short_name": "houryou",
   "content_security_policy": "default-src 'none'; script-src 'self'"
 }
